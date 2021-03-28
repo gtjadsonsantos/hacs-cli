@@ -1,5 +1,4 @@
 import argparse
-from os import path, remove
 import requests
 import shutil
 import os
@@ -72,8 +71,11 @@ class Integration(IBasic):
 
     def list_local(self, args: argparse.Namespace) -> None:
 
-       for integration in os.listdir(os.path.join(args.config,"custom_components")):
-           print(integration)
+        try:
+          for appdaemon in os.listdir(os.path.join(args.config,"custom_components")):
+            print(appdaemon)
+        except FileNotFoundError as e:
+            print(e)
         
 
     def __findIntegration(self,repo_integration:str) -> bool:

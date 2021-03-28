@@ -74,10 +74,12 @@ class Themes(IBasic):
         pass
 
     def list_local(self, args: argparse.Namespace) -> None:
-
-       for theme in os.listdir(os.path.join(args.config,"themes")):
-           print(theme)
         
+        try:
+          for appdaemon in os.listdir(os.path.join(args.config,"themes")):
+            print(appdaemon)
+        except FileNotFoundError as e:
+            print(e)
 
     def __findTheme(self,repo_theme:str) -> bool:
         response:dict = requests.get(API_HACS + "/repositories",headers=HEADERS).json()
