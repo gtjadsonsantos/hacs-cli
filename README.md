@@ -31,7 +31,7 @@ optional arguments:
 ## Install
 
 ```bash
-    curl https://github.com/jadson179/hacs-cli/raw/master/hacs-cli -o /usr/local/bin/hacs-cli 
+    wget https://github.com/jadson179/hacs-cli/raw/master/hacs-cli -o /usr/local/bin/hacs-cli 
 ```
 
 
