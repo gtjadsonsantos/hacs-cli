@@ -3,6 +3,7 @@ import asyncio
 from controllers.integrations import Integration
 from controllers.themes import Themes
 from controllers.appdaemon import AppDaemons
+from controllers.netdaemon import NetDaemons
 
 from const import VERSION
 
@@ -44,9 +45,15 @@ def get_arguments() -> argparse.Namespace :
     appdaemon.add_argument("-ll","--list-local",action="store_true",help="List all local")
     appdaemon.set_defaults(func=AppDaemons)
 
+    netdaemon = subparser.add_parser("netdaemon")
+    netdaemon.add_argument("-a","--add",action="store",help="Added new netdaemon")    
+    netdaemon.add_argument("-r","--remove",action="store",help="Remove netdaemon installed")    
+    netdaemon.add_argument("-l","--list",action="store_true",help="List all netdaemons")
+    netdaemon.add_argument("-ll","--list-local",action="store_true",help="List all local")
+    netdaemon.set_defaults(func=NetDaemons)
+    
     plugins = subparser.add_parser("plugins")
     pythonscripts = subparser.add_parser("pythonscripts")
-    netdaemon = subparser.add_parser("netdaemon")
 
     arguments = parser.parse_args()
     return arguments
