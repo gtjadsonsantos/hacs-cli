@@ -13,7 +13,7 @@
 
 ```bash 
 
-hacs-cli -h
+> hacs-cli -h
 
 usage: hacs-cli
 

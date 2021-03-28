@@ -10,7 +10,6 @@ from . import IBasic
 
 class Integration(IBasic):
     def __init__(self,args:argparse.Namespace):
-
         
         if args.add: 
             self.add(args)
@@ -23,25 +22,36 @@ class Integration(IBasic):
 
 
     def add(self, args: argparse.Namespace) -> None:
-        
-        repositorie = str(args.add)
+        repositorie = str(args.add)        
 
-        localPath = os.path.join(args.config,HACS_CLI_FOLDER,repositorie.split("/")[1])
+        try:
+            if self.__findIntegration(repositorie):
 
-        git.Repo.clone_from(
-          "git@github.com:{repositorie}.git".format(repositorie=repositorie),
-          localPath
-        )
+                if os.path.exists(os.path.join(args.config,HACS_CLI_FOLDER)):
+                    shutil.rmtree(os.path.join(args.config,HACS_CLI_FOLDER))
 
-        for item in os.listdir(os.path.join(args.config,HACS_CLI_FOLDER)):
-            shutil.move(
-                os.path.join(localPath,"custom_components",item),
-                os.path.join(args.config,"custom_components")
-        )
+                localPath = os.path.join(args.config,HACS_CLI_FOLDER,repositorie.split("/")[1])
 
-        shutil.rmtree(
-            os.path.join(args.config,HACS_CLI_FOLDER)
-        )
+                git.Repo.clone_from(
+                "git@github.com:{repositorie}.git".format(repositorie=repositorie),
+                localPath
+                )
+
+                for item in os.listdir(os.path.join(args.config,HACS_CLI_FOLDER)):
+                    shutil.move(
+                        os.path.join(localPath,"custom_components",item),
+                        os.path.join(args.config,"custom_components"
+                        )
+                )
+                shutil.rmtree(
+                    os.path.join(args.config,HACS_CLI_FOLDER)
+                )
+            else:
+                print("Integration not found")
+                print("Hacs Development: https://hacs.xyz/docs/publish/integration")
+                
+        except shutil.Error as e :
+            print(e)
         pass
 
     def remove(self, args: argparse.Namespace) -> None:
@@ -54,11 +64,10 @@ class Integration(IBasic):
             print("Integration not exists")
 
     def list(self, args: argparse.Namespace) -> None:
-        response = requests.get(API_HACS + "/repositories",headers=HEADERS).json()
+        response:dict = requests.get(API_HACS + "/repositories",headers=HEADERS).json()
 
         for integration in response["integration"]:
             print(integration)
-
         pass
 
     def list_local(self, args: argparse.Namespace) -> None:
@@ -66,4 +75,16 @@ class Integration(IBasic):
        for integration in os.listdir(os.path.join(args.config,"custom_components")):
            print(integration)
         
+
+    def __findIntegration(self,repo_integration:str) -> bool:
+        response:dict = requests.get(API_HACS + "/repositories",headers=HEADERS).json()
+
+        isExists = False
+
+        for integration in response["integration"]:
+            if integration == repo_integration: isExists = True
+        
+        return isExists
+        pass
+
 
