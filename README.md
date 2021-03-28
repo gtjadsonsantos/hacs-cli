@@ -34,6 +34,13 @@ optional arguments:
     curl https://github.com/jadson179/hacs-cli/raw/master/hacs-cli -o /usr/local/bin/hacs-cli 
 ```
 
+
+## Examples
+
+```
+  hacs-cli -c ./path_to_homeassistant integrations --add jadson179/vapix 
+```
+
 ## Autor 
 
 <table>
