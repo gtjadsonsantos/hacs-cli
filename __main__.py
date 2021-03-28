@@ -32,7 +32,7 @@ def get_arguments() -> argparse.Namespace :
     themes.add_argument("-a","--add",action="store",help="Added new theme")    
     themes.add_argument("-r","--remove",action="store",help="Remove theme installed")    
     themes.add_argument("-l","--list",action="store_true",help="List all themes")
-    themes.add_argument("-ll","--list-local",action="store_true",help="List all themes local")
+    themes.add_argument("-ll","--list-local",action="store_true",help="List all local")
     themes.set_defaults(func=Themes)
 
     plugins = subparser.add_parser("plugins")

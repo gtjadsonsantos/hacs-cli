@@ -11,8 +11,7 @@
 
 # HACS CLI
 
-```bash 
-
+```bash
 > hacs-cli -h
 
 usage: hacs-cli

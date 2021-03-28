@@ -59,7 +59,10 @@ class Themes(IBasic):
         pathTheme = os.path.join(args.config,"themes",filename)
         
         if os.path.exists(pathTheme):
-            shutil.rmtree(pathTheme)
+            if os.path.isdir(pathTheme):
+                shutil.rmtree(pathTheme)
+            else:
+                os.remove(pathTheme)
         else:
             print("Theme not exists")
 
