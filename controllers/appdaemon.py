@@ -29,19 +29,24 @@ class AppDaemons(IBasic):
                 if os.path.exists(os.path.join(args.config,HACS_CLI_FOLDER)):
                     shutil.rmtree(os.path.join(args.config,HACS_CLI_FOLDER))
 
+
                 localPath = os.path.join(args.config,HACS_CLI_FOLDER,repositorie.split("/")[1])
 
                 git.Repo.clone_from(
                 "git@github.com:{repositorie}.git".format(repositorie=repositorie),
                 localPath
                 )
+              
+                for item in os.listdir(os.path.join(localPath,"apps")):
 
-                for item in os.listdir(os.path.join(args.config,HACS_CLI_FOLDER)):
+                    if os.path.exists(os.path.join(args.config,"apps",item)):
+                        shutil.rmtree(os.path.join(args.config,"apps",item))
+
                     shutil.move(
                         os.path.join(localPath,"apps",item),
-                        os.path.join(args.config,"apps"
-                        )
-                )
+                        os.path.join(args.config,"apps",item)
+                   )
+
                 shutil.rmtree(
                     os.path.join(args.config,HACS_CLI_FOLDER)
                 )

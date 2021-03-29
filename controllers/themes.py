@@ -37,11 +37,13 @@ class Themes(IBasic):
                 localPath
                 )
 
-                for item in os.listdir(os.path.join(args.config,HACS_CLI_FOLDER)):
+                for item in os.listdir(os.path.join(localPath,"themes")):
+                    if os.path.exists(os.path.join(args.config,"themes",item)):
+                        shutil.rmtree(os.path.join(args.config,"themes",item))
+                    
                     shutil.move(
                         os.path.join(localPath,"themes",item),
-                        os.path.join(args.config,"themes"
-                        )
+                        os.path.join(args.config,"themes",item)
                 )
                 shutil.rmtree(
                     os.path.join(args.config,HACS_CLI_FOLDER)
@@ -86,7 +88,7 @@ class Themes(IBasic):
 
         isExists = False
 
-        for theme in response["themes"]:
+        for theme in response["theme"]:
             if theme == repo_theme: isExists = True
         
         return isExists

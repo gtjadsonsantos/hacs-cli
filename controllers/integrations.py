@@ -36,11 +36,14 @@ class Integration(IBasic):
                 localPath
                 )
 
-                for item in os.listdir(os.path.join(args.config,HACS_CLI_FOLDER)):
+                for item in os.listdir(os.path.join(localPath,"custom_components")):
+
+                    if os.path.exists(os.path.join(args.config,"custom_components",item)):
+                        shutil.rmtree(os.path.join(args.config,"custom_components",item))
+                
                     shutil.move(
                         os.path.join(localPath,"custom_components",item),
-                        os.path.join(args.config,"custom_components"
-                        )
+                        os.path.join(args.config,"custom_components")
                 )
                 shutil.rmtree(
                     os.path.join(args.config,HACS_CLI_FOLDER)
