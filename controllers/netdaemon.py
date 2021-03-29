@@ -36,6 +36,10 @@ class NetDaemons(IBasic):
                 "git@github.com:{repositorie}.git".format(repositorie=repositorie),
                 localPath
                 )
+
+                if not os.path.exists(os.path.join(args.config,"netdaemon")):
+                        os.mkdir(os.path.join(args.config,"netdaemon"))  
+
                     
                 for item in os.listdir(os.path.join(localPath,"apps")):
 

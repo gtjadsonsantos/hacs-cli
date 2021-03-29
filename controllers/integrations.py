@@ -35,6 +35,8 @@ class Integration(IBasic):
                 "git@github.com:{repositorie}.git".format(repositorie=repositorie),
                 localPath
                 )
+                if not os.path.exists(os.path.join(args.config,"custom_components")):
+                        os.mkdir(os.path.join(args.config,"custom_components"))  
 
                 for item in os.listdir(os.path.join(localPath,"custom_components")):
 

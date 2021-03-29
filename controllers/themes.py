@@ -37,6 +37,9 @@ class Themes(IBasic):
                 localPath
                 )
 
+                if not os.path.exists(os.path.join(args.config,"themes")):
+                        os.mkdir(os.path.join(args.config,"themes"))  
+
                 for item in os.listdir(os.path.join(localPath,"themes")):
                     if os.path.exists(os.path.join(args.config,"themes",item)):
                         shutil.rmtree(os.path.join(args.config,"themes",item))

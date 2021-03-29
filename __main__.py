@@ -4,6 +4,7 @@ from controllers.integrations import Integration
 from controllers.themes import Themes
 from controllers.appdaemon import AppDaemons
 from controllers.netdaemon import NetDaemons
+from controllers.pythonscripts import PythonScripts
 
 from const import VERSION
 
@@ -52,8 +53,16 @@ def get_arguments() -> argparse.Namespace :
     netdaemon.add_argument("-ll","--list-local",action="store_true",help="List all local")
     netdaemon.set_defaults(func=NetDaemons)
     
-    plugins = subparser.add_parser("plugins")
     pythonscripts = subparser.add_parser("pythonscripts")
+    pythonscripts.add_argument("-a","--add",action="store",help="Added new python_script")    
+    pythonscripts.add_argument("-r","--remove",action="store",help="Remove python_script installed")    
+    pythonscripts.add_argument("-l","--list",action="store_true",help="List all python_scripts")
+    pythonscripts.add_argument("-ll","--list-local",action="store_true",help="List all local")
+    pythonscripts.set_defaults(func=PythonScripts)
+    
+    
+    
+    plugins = subparser.add_parser("plugins")
 
     arguments = parser.parse_args()
     return arguments
