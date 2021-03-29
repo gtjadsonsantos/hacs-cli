@@ -30,9 +30,11 @@ optional arguments:
 ## Install
 
 ```bash
-    wget https://github.com/jadson179/hacs-cli/raw/master/hacs-cli -o /usr/local/bin/hacs-cli 
+    \
+    git clone https://github.com/jadson179/hacs-cli.git && cd hacs-cli \
+    && pip3 install -r requirements.txt \
+    && pyinstaller --onefile __main__.py -n hacs-cli && sudo mv ./dist/hacs-cli /usr/local/bin
 ```
-
 
 ## Examples
 
