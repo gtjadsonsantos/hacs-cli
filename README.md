@@ -36,12 +36,6 @@ optional arguments:
     && pyinstaller --onefile __main__.py -n hacs-cli && sudo mv ./dist/hacs-cli /usr/local/bin
 ```
 
-## Examples
-
-```
-  hacs-cli -c ./path_to_homeassistant integrations --add jadson179/vapix 
-```
-
 ## Autor 
 
 <table>
